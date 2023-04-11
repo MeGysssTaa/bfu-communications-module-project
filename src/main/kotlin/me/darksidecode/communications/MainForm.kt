@@ -10,13 +10,19 @@ import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-const val WorldMapWidth = 1100
-const val WorldMapHeight = 585
+private const val WorldMapWidth = 1100
+private const val WorldMapHeight = 585
 
-const val LocationPinSize = 48
+private const val LocationPinNormalSize = 40
+private const val LocationPinHoveredSize = 50
 
 class MainForm : JFrame() {
     private val pane = JPanel(null)
+
+    private lateinit var locPinNormalIcon: ImageIcon
+    private lateinit var locPinHoveredIcon: ImageIcon
+
+    private var currentPopup: CountryPopup? = null
 
     init {
         defaultCloseOperation = EXIT_ON_CLOSE
@@ -25,7 +31,10 @@ class MainForm : JFrame() {
         setupComponents()
         pane.setBounds(0, 0, WorldMapWidth, WorldMapHeight)
         pane.addMouseListener(object : MouseAdapter() {
-            override fun mouseClicked(e: MouseEvent) = println("click ${e.x} ${e.y} | ${e.xOnScreen} ${e.yOnScreen}")
+            override fun mouseClicked(e: MouseEvent) {
+                currentPopup?.dispose()
+                println("click ${e.x} ${e.y} | ${e.xOnScreen} ${e.yOnScreen}")
+            }
         })
         add(pane)
 
@@ -42,19 +51,53 @@ class MainForm : JFrame() {
         lblWorldMap.setBounds(0, 0, WorldMapWidth, WorldMapHeight)
         pane.add(lblWorldMap)
 
-        addRegionButton(880, 230) { println("click japan") }
+        val locPinImage = ImageIO.read(javaClass.classLoader.getResource("location_pin.png"))
+        locPinNormalIcon = ImageIcon(locPinImage.getScaledInstance(
+            LocationPinNormalSize, LocationPinNormalSize, Image.SCALE_SMOOTH))
+        locPinHoveredIcon = ImageIcon(locPinImage.getScaledInstance(
+            LocationPinHoveredSize, LocationPinHoveredSize, Image.SCALE_SMOOTH))
+
+        addRegionButton(Japan, 880, 230)
+        addRegionButton(Australia, 900, 470)
+        addRegionButton(Brazil, 380, 400)
     }
 
-    private fun addRegionButton(x: Int, y: Int, buttonClicked: () -> Unit) {
-        val locPinImage = ImageIO
-            .read(javaClass.classLoader.getResource("location_pin.png"))
-            .getScaledInstance(LocationPinSize, LocationPinSize, Image.SCALE_SMOOTH)
-        val lblBtn = JLabel(ImageIcon(locPinImage))
-        lblBtn.setBounds(x - LocationPinSize / 2, y - LocationPinSize, LocationPinSize, LocationPinSize)
-        lblBtn.addMouseListener(object : MouseAdapter() {
-            override fun mouseClicked(e: MouseEvent) = buttonClicked()
+    private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {
+        val locationPin = JLabel(locPinNormalIcon)
+        locationPin.setBounds(
+            x - LocationPinNormalSize / 2,
+            y - LocationPinNormalSize,
+            LocationPinNormalSize,
+            LocationPinNormalSize
+        )
+        locationPin.addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent) {
+                currentPopup?.dispose()
+                currentPopup = CountryPopup(countryInfo, x, y, location, size)
+            }
+
+            override fun mouseEntered(e: MouseEvent) {
+                locationPin.icon = locPinHoveredIcon
+                locationPin.setBounds(
+                    x - LocationPinHoveredSize / 2,
+                    y - LocationPinHoveredSize,
+                    LocationPinHoveredSize,
+                    LocationPinHoveredSize
+                )
+            }
+
+            override fun mouseExited(e: MouseEvent) {
+                locationPin.icon = locPinNormalIcon
+                locationPin.setBounds(
+                    x - LocationPinNormalSize / 2,
+                    y - LocationPinNormalSize,
+                    LocationPinNormalSize,
+                    LocationPinNormalSize
+                )
+            }
         })
-        pane.add(lblBtn)
-        pane.setComponentZOrder(lblBtn, 0)
+
+        pane.add(locationPin)
+        pane.setComponentZOrder(locationPin, 0)
     }
 }
