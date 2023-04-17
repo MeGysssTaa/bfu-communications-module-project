@@ -7,7 +7,7 @@ import javax.swing.JDialog
 import javax.swing.JPanel
 import javax.swing.JScrollPane
 
-private const val PopupWidth = 300
+private const val PopupWidth = 375
 private const val PopupHeight = 400
 
 class CountryPopup(

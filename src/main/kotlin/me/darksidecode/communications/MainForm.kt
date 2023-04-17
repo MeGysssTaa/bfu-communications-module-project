@@ -10,8 +10,8 @@ import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-private const val WorldMapWidth = 1100
-private const val WorldMapHeight = 585
+private const val WorldMapWidth = 1550
+private const val WorldMapHeight = 850
 
 private const val LocationPinNormalSize = 40
 private const val LocationPinHoveredSize = 50
@@ -39,6 +39,8 @@ class MainForm : JFrame() {
         add(pane)
 
         size = Dimension(WorldMapWidth + 10, WorldMapHeight + 30)
+        isResizable = false
+        extendedState = extendedState or MAXIMIZED_BOTH
         setLocationRelativeTo(null)
         isVisible = true
     }
@@ -57,9 +59,10 @@ class MainForm : JFrame() {
         locPinHoveredIcon = ImageIcon(locPinImage.getScaledInstance(
             LocationPinHoveredSize, LocationPinHoveredSize, Image.SCALE_SMOOTH))
 
-        addRegionButton(Japan, 880, 230)
-        addRegionButton(Australia, 900, 470)
-        addRegionButton(Brazil, 380, 400)
+        addRegionButton(Germany, 775, 300)
+        addRegionButton(Japan, 1235, 335)
+        addRegionButton(France, 750, 320)
+        addRegionButton(Italy, 785, 340)
     }
 
     private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {

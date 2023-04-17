@@ -1,71 +1,113 @@
 package me.darksidecode.communications
 
+import java.awt.Color
 import java.awt.Font
 import java.awt.Image
-import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
 
 interface CountryInfo {
     fun fill(contents: JPanel) // `contents` has layout `MigLayout`
+
+    fun title(contents: JPanel, title: String) {
+        val lbl1 = JLabel(title)
+        lbl1.font = Font("Segoe UI", Font.PLAIN, 24)
+        lbl1.foreground = Color(150, 150, 150)
+        contents.add(lbl1, "wrap")
+    }
+
+    fun htmlText(contents: JPanel, htmlText: String) {
+        val lbl2 = JLabel("<html>$htmlText</html>")
+        lbl2.font = Font("Segoe UI", Font.PLAIN, 16)
+        contents.add(lbl2, "wrap")
+    }
+
+    fun image(contents: JPanel, imageFileName: String) {
+        var imageIcon = ImageIcon(javaClass.getResource("/$imageFileName"))
+        var image = imageIcon.image
+        image = image.getScaledInstance(250, 200, Image.SCALE_DEFAULT)
+        imageIcon = ImageIcon(image)
+        contents.add(JLabel(imageIcon), "wrap")
+    }
 }
 
-object Brazil : CountryInfo {
+object Germany : CountryInfo {
     override fun fill(contents: JPanel) {
-        val lbl1 = JLabel("Бразилия")
-        lbl1.font = Font("Segoe UI", Font.BOLD, 24)
-        contents.add(lbl1, "wrap")
+        title(contents, "Германия")
 
-        val img1 = ImageIO.read(javaClass.classLoader.getResource("test.png"))
-            .getScaledInstance(250, 200, Image.SCALE_SMOOTH)
-        contents.add(JLabel(ImageIcon(img1)), "wrap")
+        htmlText(contents, """
+            <b>Жмут руки</b> при приветствии <p>
+            как мужчины, так и женщины <p>
+        """.trimIndent())
 
-        val lbl2 = JLabel("<html><p>line 1<p>line <b>two</b>2 <p>sdfsdfdsdfsfs<p>sdfsdfqe<p>qeqwe<p>adasd<p>zfzxzxzc<p>qeqweqwedf</html>")
-        lbl2.font = Font("Segoe UI", Font.PLAIN, 18)
-        contents.add(lbl2, "wrap")
+        htmlText(contents, """
+            Осторожнее с <b>постукиванием себя по лбу</b>! <p>
+            Так немцы говорят собеседнику: <p>
+            <i>"Ты что, с ума сошёл?"</i> <p>
+        """.trimIndent())
     }
 }
 
 object Japan : CountryInfo {
     override fun fill(contents: JPanel) {
-        val lbl1 = JLabel("Япония")
-        lbl1.font = Font("Segoe UI", Font.BOLD, 24)
-        contents.add(lbl1, "wrap")
+        title(contents, "Япония")
 
-//        val img1 = ImageIO.read(javaClass.getResource("/gigacapy.gif"))
-//            .getScaledInstance(250, 200, Image.SCALE_SMOOTH)
+        htmlText(contents, """
+            Любой <b>физический контакт</b> считается <p>
+            невежливым. Жать руки не надо - вместо <p>
+            этого при встрече японцы кланяются. <p>
+        """.trimIndent())
 
-        var imageIcon = ImageIcon(javaClass.getResource("/gigacapy.gif")) // load the image to a imageIcon
+        htmlText(contents, """
+            <b>Кивок</b> - просто знак вежливости, не согласия. <p>
+        """.trimIndent())
 
-        val image = imageIcon.image // transform it
-
-        val newimg = image.getScaledInstance(250, 200, Image.SCALE_DEFAULT) // scale it the smooth way
-
-        imageIcon = ImageIcon(newimg) // transform it back
-
-
-        //val img1 = ImageIcon(javaClass.getResource("/gigacapy.gif"))
-        contents.add(JLabel(imageIcon), "wrap")
-
-        val lbl2 = JLabel("<html><p>line 1<p>line <b>two</b>2 <p>sdfsdfdsdfsfs<p>sdfsdfqe<p>qeqwe<p>adasd<p>zfzxzxzc<p>qeqweqwedf</html>")
-        lbl2.font = Font("Segoe UI", Font.PLAIN, 18)
-        contents.add(lbl2, "wrap")
+        htmlText(contents, """
+            <b>Смотреть в глаза</b> не принято. <p>
+        """.trimIndent())
     }
 }
 
-object Australia : CountryInfo {
+object France : CountryInfo {
     override fun fill(contents: JPanel) {
-        val lbl1 = JLabel("Австралия")
-        lbl1.font = Font("Segoe UI", Font.BOLD, 24)
-        contents.add(lbl1, "wrap")
+        title(contents, "Франция")
 
-        val img1 = ImageIO.read(javaClass.classLoader.getResource("test.png"))
-            .getScaledInstance(250, 200, Image.SCALE_SMOOTH)
-        contents.add(JLabel(ImageIcon(img1)), "wrap")
+        htmlText(contents, """
+            <b>Пожимают плечами</b> французы не когда <p>
+            они растеряны, а когда хотят сказать: <p>
+            <i>"Я возмущен, и наплевать мне на это"</i> <p>
+        """.trimIndent())
+    }
+}
 
-        val lbl2 = JLabel("<html><p>line 1<p>line <b>two</b>2 <p>sdfsdfdsdfsfs<p>sdfsdfqe<p>qeqwe<p>adasd<p>zfzxzxzc<p>qeqweqwedf</html>")
-        lbl2.font = Font("Segoe UI", Font.PLAIN, 18)
-        contents.add(lbl2, "wrap")
+object Italy : CountryInfo {
+    override fun fill(contents: JPanel) {
+        title(contents, "Италия")
+
+        htmlText(contents, """
+            Жесты крайне сильно разнятся в разных <p>
+            частях страны, особенно на Севере и Юге. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            <b>Che vuoi</b> - пожалуй, самый известный <p>
+            итальянский жест - соединение кончиков всех <p>
+            пальцев в конус, направленный вверх. Этим <p>
+            жестом итальянцы выражают недоверие или <p>
+            высмеивают сказанное другим человеком. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Жест <b>"коза"</b> у итальянцев оскорбительный, <p>
+            в отличие от Испании и некоторых стран <p>
+            Латинской Америки. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Итальянцы складывают указательные пальцы <p>
+            в <b>крест на уровне рта</b>, когда хотят <p>
+            уверить собеседника в своей искренности.
+        """.trimIndent())
     }
 }
