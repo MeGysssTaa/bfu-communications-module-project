@@ -13,16 +13,17 @@ interface CountryInfo {
     fun fill(contents: JPanel) // `contents` has layout `MigLayout`
 
     fun title(contents: JPanel) {
-        val lbl1 = JLabel(name)
-        lbl1.font = Font("Segoe UI", Font.PLAIN, 24)
-        lbl1.foreground = Color(150, 150, 150)
-        contents.add(lbl1, "wrap")
+        val lbl = JLabel(name)
+        lbl.font = Font("Segoe UI", Font.PLAIN, 24)
+        lbl.foreground = Color(180, 180, 180)
+        contents.add(lbl, "wrap")
     }
 
     fun htmlText(contents: JPanel, htmlText: String) {
-        val lbl2 = JLabel("<html>$htmlText</html>")
-        lbl2.font = Font("Segoe UI", Font.PLAIN, 16)
-        contents.add(lbl2, "wrap")
+        val lbl = JLabel("<html>$htmlText</html>")
+        lbl.font = Font("Segoe UI", Font.PLAIN, 16)
+        lbl.foreground = Color(225, 225, 225)
+        contents.add(lbl, "wrap")
     }
 
     fun image(contents: JPanel, imageFileName: String) {
@@ -239,6 +240,70 @@ object RepublicOfSouthAfrica : CountryInfo {
             Широкая <b>улыбка, смех</b> в странах <p>
             Африки зачастую расценивается как признак <p>
             недоумения, замешательства. <p>
+        """.trimIndent())
+    }
+}
+
+object Mexico : CountryInfo {
+    override val name = "Мексика"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            Во время делового общения необходимо <p>
+            <b>пожать руку</b> каждому из участников <p>
+            (при встрече и при расставании), а также отдавать <p>
+            <b>легкий поклон</b> каждому кто входит в комнату. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            <b>Физический контакт</b> во время общения <p>
+            распространён широко. В Мексике при <p>
+            встрече часто обнимаются, касаются друг друга <p>
+            за локти/плечи при длительном рукопожатии. <p>
+        """.trimIndent())
+    }
+}
+
+object Canada : CountryInfo {
+    override val name = "Канада"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            Манеры канадцев сильно разнятся от части <p>
+            страны. В провинции Квебек они ближе к <p>
+            <b>французам</b>, а канадцы с британским <p>
+            происхождением, соответственно, — к <p>
+            <b>британцам</b> или <b>американцам</b>. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            В Канаде принято <b>улыбаться</b>. <p>
+            Почти всем и всегда, без повода. <p>
+        """.trimIndent())
+    }
+}
+
+object India : CountryInfo {
+    override val name = "Индия"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            При приветствии в большинстве мест Индии <p>
+            принято <b>складывать ладони у груди</b> и <p>
+            произносить <i>"намасте"</i>. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Передавать предметы лучше через <p>
+            <b>правую руку</b>. Левая в Индии <p>
+            считается нечистой — передавая что-либо <p>
+            через неё, вы можете оскорбить человека. <p>
         """.trimIndent())
     }
 }

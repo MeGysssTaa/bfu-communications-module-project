@@ -1,16 +1,17 @@
 package me.darksidecode.communications
 
 import net.miginfocom.swing.MigLayout
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.Point
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
-import javax.swing.JDialog
 import javax.swing.JPanel
 import javax.swing.JScrollPane
+import javax.swing.JWindow
 
-private const val PopupWidth = 375
-private const val PopupHeight = 400
+private const val PopupWidth: Int = 390
+private const val PopupHeight: Int = 420
 
 class CountryPopup(
     countryInfo: CountryInfo,
@@ -19,7 +20,7 @@ class CountryPopup(
     parentPos: Point,
     parentSize: Dimension,
     val hoverStateChanged: () -> Unit,
-) : JDialog() {
+) : JWindow() {
     private val contents = JPanel(MigLayout())
 
     @Volatile
@@ -27,8 +28,9 @@ class CountryPopup(
         private set
 
     init {
+        val scrollPane = JScrollPane(contents)
         countryInfo.fill(contents)
-        add(JScrollPane(contents))
+        add(scrollPane)
         size = Dimension(PopupWidth, PopupHeight)
 
         val rightBorder = parentPos.x + parentSize.width - 10
@@ -57,8 +59,10 @@ class CountryPopup(
         })
 
         setLocation(popupX, popupY)
+        contents.background = Color(0, 0, 0, 100)
+        background = Color(0, 0, 0, 100)
 
-        isUndecorated = true
+        //isUndecorated = true
         isVisible = true
     }
 }

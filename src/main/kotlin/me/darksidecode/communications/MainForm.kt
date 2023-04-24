@@ -9,13 +9,13 @@ import java.awt.event.MouseEvent
 import javax.imageio.ImageIO
 import javax.swing.*
 
-private const val WorldMapWidth = 1550
-private const val WorldMapHeight = 850
+private const val WorldMapWidth: Int = 1550
+private const val WorldMapHeight: Int = 850
 
-private const val LocationPinNormalSize = 40
-private const val LocationPinHoveredSize = 50
+private const val LocationPinNormalSize: Int = 40
+private const val LocationPinHoveredSize: Int = 50
 
-private const val AutoToggleInfoOnHoverMillis = 200L
+private const val AutoToggleInfoOnHoverMillis: Long = 0L
 
 class MainForm : JFrame() {
     private val pane = JPanel(null)
@@ -34,7 +34,7 @@ class MainForm : JFrame() {
         pane.addMouseListener(object : MouseAdapter() {
             override fun mouseClicked(e: MouseEvent) {
                 currentPopup?.dispose()
-                println("click ${e.x} ${e.y} | ${e.xOnScreen} ${e.yOnScreen}")
+                println("click ${e.x}, ${e.y}")
             }
         })
         add(pane)
@@ -69,6 +69,9 @@ class MainForm : JFrame() {
         addRegionButton(China, 1147, 319)
         addRegionButton(Brazil, 549, 568)
         addRegionButton(RepublicOfSouthAfrica, 827, 655)
+        addRegionButton(Mexico, 359 , 420)
+        addRegionButton(Canada, 355, 240)
+        addRegionButton(India, 1038, 429)
     }
 
     private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {
@@ -76,7 +79,7 @@ class MainForm : JFrame() {
         hoverText.font = Font("Segoe UI", Font.BOLD, 24)
         hoverText.foreground = Color(255, 255, 255)
         val hoverTextWidth = 10 + 17 * hoverText.text.length
-        val hoverTextHeight = 22
+        val hoverTextHeight = 24
         hoverText.setBounds(
             x - hoverTextWidth / 2,
             y + 2,
@@ -107,6 +110,9 @@ class MainForm : JFrame() {
             private val isHovered get() =
                 isPinHovered || (currentPopup == ourLastPopup && (currentPopup?.isHovered ?: false))
 
+            private var popupOpenTime: Long = 0L
+            private val millisSincePopupOpen: Long get() = System.currentTimeMillis() - popupOpenTime
+
             override fun mouseClicked(e: MouseEvent) {
                 showCountryInfo()
             }
@@ -115,6 +121,7 @@ class MainForm : JFrame() {
                 currentPopup?.dispose()
                 ourLastPopup = CountryPopup(countryInfo, x, y, location, size) { mouseExitedCheckLater() }
                 currentPopup = ourLastPopup
+                popupOpenTime = System.currentTimeMillis()
             }
 
             override fun mouseEntered(e: MouseEvent) {
@@ -131,7 +138,6 @@ class MainForm : JFrame() {
 
                 val hoverTimer = r@ {
                     Thread.sleep(AutoToggleInfoOnHoverMillis)
-                    println("currentPopup = $currentPopup ourLastPopup = $ourLastPopup (${currentPopup?.isHovered}) / $isPinHovered")
                     if (!isHovered) return@r
                     SwingUtilities.invokeLater(this::showCountryInfo)
                 }
@@ -155,6 +161,9 @@ class MainForm : JFrame() {
             }
 
             private fun mouseExitedCheckLater() {
+                if (millisSincePopupOpen < 250)
+                    return
+
                 val hoverTimer = r@ {
                     Thread.sleep(AutoToggleInfoOnHoverMillis)
                     if (isHovered) return@r
