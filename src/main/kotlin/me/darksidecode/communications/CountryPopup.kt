@@ -62,7 +62,6 @@ class CountryPopup(
         contents.background = Color(0, 0, 0, 100)
         background = Color(0, 0, 0, 100)
 
-        //isUndecorated = true
         isVisible = true
     }
 }
