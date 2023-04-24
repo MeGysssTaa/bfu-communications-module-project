@@ -1,6 +1,8 @@
 package me.darksidecode.communications
 
+import java.awt.Color
 import java.awt.Dimension
+import java.awt.Font
 import java.awt.Image
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
@@ -69,6 +71,21 @@ class MainForm : JFrame() {
     }
 
     private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {
+        val hoverText = JLabel(countryInfo.name.uppercase())
+        hoverText.font = Font("Segoe UI", Font.BOLD, 24)
+        hoverText.foreground = Color(255, 255, 255)
+        val hoverTextWidth = 10 + 17 * hoverText.text.length
+        val hoverTextHeight = 22
+        hoverText.setBounds(
+            x - hoverTextWidth / 2,
+            y + 2,
+            hoverTextWidth,
+            hoverTextHeight
+        )
+        pane.add(hoverText)
+        pane.setComponentZOrder(hoverText, 0)
+        hoverText.isVisible = false
+
         val locationPin = JLabel(locPinNormalIcon)
         locationPin.setBounds(
             x - LocationPinNormalSize / 2,
@@ -76,6 +93,9 @@ class MainForm : JFrame() {
             LocationPinNormalSize,
             LocationPinNormalSize
         )
+        pane.add(locationPin)
+        pane.setComponentZOrder(locationPin, 0)
+
         locationPin.addMouseListener(object : MouseAdapter() {
             override fun mouseClicked(e: MouseEvent) {
                 currentPopup?.dispose()
@@ -83,6 +103,7 @@ class MainForm : JFrame() {
             }
 
             override fun mouseEntered(e: MouseEvent) {
+                hoverText.isVisible = true
                 locationPin.icon = locPinHoveredIcon
                 locationPin.setBounds(
                     x - LocationPinHoveredSize / 2,
@@ -93,6 +114,7 @@ class MainForm : JFrame() {
             }
 
             override fun mouseExited(e: MouseEvent) {
+                hoverText.isVisible = false
                 locationPin.icon = locPinNormalIcon
                 locationPin.setBounds(
                     x - LocationPinNormalSize / 2,
@@ -102,8 +124,5 @@ class MainForm : JFrame() {
                 )
             }
         })
-
-        pane.add(locationPin)
-        pane.setComponentZOrder(locationPin, 0)
     }
 }

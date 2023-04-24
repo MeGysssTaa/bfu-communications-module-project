@@ -8,10 +8,12 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 
 interface CountryInfo {
+    val name: String
+
     fun fill(contents: JPanel) // `contents` has layout `MigLayout`
 
-    fun title(contents: JPanel, title: String) {
-        val lbl1 = JLabel(title)
+    fun title(contents: JPanel) {
+        val lbl1 = JLabel(name)
         lbl1.font = Font("Segoe UI", Font.PLAIN, 24)
         lbl1.foreground = Color(150, 150, 150)
         contents.add(lbl1, "wrap")
@@ -33,8 +35,10 @@ interface CountryInfo {
 }
 
 object Germany : CountryInfo {
+    override val name = "Германия"
+
     override fun fill(contents: JPanel) {
-        title(contents, "Германия")
+        title(contents)
 
         htmlText(contents, """
             <b>Жмут руки</b> при приветствии <p>
@@ -50,8 +54,10 @@ object Germany : CountryInfo {
 }
 
 object Japan : CountryInfo {
+    override val name = "Япония"
+
     override fun fill(contents: JPanel) {
-        title(contents, "Япония")
+        title(contents)
 
         htmlText(contents, """
             Любой <b>физический контакт</b> считается <p>
@@ -76,8 +82,10 @@ object Japan : CountryInfo {
 }
 
 object France : CountryInfo {
+    override val name = "Франция"
+
     override fun fill(contents: JPanel) {
-        title(contents, "Франция")
+        title(contents)
 
         htmlText(contents, """
             <b>Пожимают плечами</b> французы не когда <p>
@@ -94,8 +102,10 @@ object France : CountryInfo {
 }
 
 object Italy : CountryInfo {
+    override val name = "Италия"
+
     override fun fill(contents: JPanel) {
-        title(contents, "Италия")
+        title(contents)
 
         htmlText(contents, """
             Жесты крайне сильно разнятся в разных <p>
@@ -125,21 +135,23 @@ object Italy : CountryInfo {
 }
 
 object Britain : CountryInfo{
+    override val name = "Великобритания"
+
     override fun fill(contents: JPanel) {
-        title(contents, "Великобритания")
+        title(contents)
 
         htmlText(contents, """
             <b>V-знак</b>, обращенный ладонью к себе,<p>
              считается оскорбительным.<p>
         """.trimIndent())
-
-
     }
 }
 
 object Greece : CountryInfo{
+    override val name = "Греция"
+
     override fun fill(contents: JPanel) {
-        title(contents, "Греция")
+        title(contents)
 
         htmlText(contents, """
               Чтобы сказать <i>«нет»</i>, нужно один<p>
@@ -156,7 +168,11 @@ object Greece : CountryInfo{
 }
 
 object China : CountryInfo{
+    override val name = "Китай"
+
     override fun fill(contents: JPanel) {
+        title(contents)
+
         htmlText(contents, """
             <b>Указание мизинцем</b> на кого-то - это<p>
             легкая форма отвращения к человеку или<p>
