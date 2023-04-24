@@ -7,16 +7,15 @@ import java.awt.Image
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import javax.imageio.ImageIO
-import javax.swing.ImageIcon
-import javax.swing.JFrame
-import javax.swing.JLabel
-import javax.swing.JPanel
+import javax.swing.*
 
 private const val WorldMapWidth = 1550
 private const val WorldMapHeight = 850
 
 private const val LocationPinNormalSize = 40
 private const val LocationPinHoveredSize = 50
+
+private const val AutoToggleInfoOnHoverMillis = 200L
 
 class MainForm : JFrame() {
     private val pane = JPanel(null)
@@ -99,12 +98,28 @@ class MainForm : JFrame() {
         pane.setComponentZOrder(locationPin, 0)
 
         locationPin.addMouseListener(object : MouseAdapter() {
+            @Volatile
+            private var ourLastPopup: CountryPopup? = null
+
+            @Volatile
+            private var isPinHovered = false
+
+            private val isHovered get() =
+                isPinHovered || (currentPopup == ourLastPopup && (currentPopup?.isHovered ?: false))
+
             override fun mouseClicked(e: MouseEvent) {
+                showCountryInfo()
+            }
+
+            private fun showCountryInfo() {
                 currentPopup?.dispose()
-                currentPopup = CountryPopup(countryInfo, x, y, location, size)
+                ourLastPopup = CountryPopup(countryInfo, x, y, location, size) { mouseExitedCheckLater() }
+                currentPopup = ourLastPopup
             }
 
             override fun mouseEntered(e: MouseEvent) {
+                isPinHovered = true
+
                 hoverText.isVisible = true
                 locationPin.icon = locPinHoveredIcon
                 locationPin.setBounds(
@@ -113,9 +128,20 @@ class MainForm : JFrame() {
                     LocationPinHoveredSize,
                     LocationPinHoveredSize
                 )
+
+                val hoverTimer = r@ {
+                    Thread.sleep(AutoToggleInfoOnHoverMillis)
+                    println("currentPopup = $currentPopup ourLastPopup = $ourLastPopup (${currentPopup?.isHovered}) / $isPinHovered")
+                    if (!isHovered) return@r
+                    SwingUtilities.invokeLater(this::showCountryInfo)
+                }
+
+                Thread(hoverTimer, "Hover Timer " + (System.nanoTime() % 1000000L)).start()
             }
 
             override fun mouseExited(e: MouseEvent) {
+                isPinHovered = false
+
                 hoverText.isVisible = false
                 locationPin.icon = locPinNormalIcon
                 locationPin.setBounds(
@@ -124,6 +150,18 @@ class MainForm : JFrame() {
                     LocationPinNormalSize,
                     LocationPinNormalSize
                 )
+
+                mouseExitedCheckLater()
+            }
+
+            private fun mouseExitedCheckLater() {
+                val hoverTimer = r@ {
+                    Thread.sleep(AutoToggleInfoOnHoverMillis)
+                    if (isHovered) return@r
+                    SwingUtilities.invokeLater { currentPopup?.dispose() }
+                }
+
+                Thread(hoverTimer, "Hover Timer " + (System.nanoTime() % 1000000L)).start()
             }
         })
     }
