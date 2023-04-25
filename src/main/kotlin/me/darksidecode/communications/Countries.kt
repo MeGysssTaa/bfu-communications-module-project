@@ -438,6 +438,7 @@ object Iran : CountryInfo {
             <b>Обниматься</b> и <b>целоваться</b> <p>
             на публике — под строгим запретом.
         """.trimIndent())
+        image(contents, "iran_hug.png", 300)
     }
 }
 
@@ -467,6 +468,13 @@ object Turkey : CountryInfo {
         sep(contents)
 
         htmlText(contents, """
+            <b>Щелчок по горлу</b> — предложение <p>
+            поесть, а не выпить. <p>
+        """.trimIndent())
+        image(contents, "turkey_lets_eat.jpeg", 355)
+        sep(contents)
+
+        htmlText(contents, """
             Для выражения <b>отрицания</b> можно:
             <ul>
                 <li> приподнять брови; </li>
@@ -488,12 +496,6 @@ object Turkey : CountryInfo {
         htmlText(contents, """
             Мужчины при встрече <b>жмут руки</b>, <p>
             но при прощании — нет. <p>
-        """.trimIndent())
-        sep(contents)
-
-        htmlText(contents, """
-            <b>Щелчок по горлу</b> — предложение <p>
-            поесть, а не выпить. <p>
         """.trimIndent())
     }
 }
