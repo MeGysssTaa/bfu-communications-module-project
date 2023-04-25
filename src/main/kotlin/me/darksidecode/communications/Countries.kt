@@ -107,7 +107,7 @@ object France : CountryInfo {
             они растеряны, а когда хотят сказать: <p>
             <i>"Я возмущен, и наплевать мне на это"</i> <p>
         """.trimIndent())
-        image(contents, "france_shrug.jpg", 370)
+        image(contents, "france_shrug.jpg", 355)
         sep(contents)
 
         htmlText(contents, """
@@ -298,7 +298,7 @@ object Brazil : CountryInfo {
         sep(contents)
 
         htmlText(contents, """
-            Жест <b>"рога"</b> — пожелание удачи. <p>
+            Жест <b>"коза"</b> — пожелание удачи. <p>
         """.trimIndent())
         image(contents, "brazil_horns.jpg", 355)
         sep(contents)
@@ -321,6 +321,7 @@ object SouthAfrica : CountryInfo {
         htmlText(contents, """
             Жест <b>"коза"</b> считается оскорбительным. <p>
         """.trimIndent())
+        image(contents, "brazil_horns.jpg", 355)
         sep(contents)
 
         htmlText(contents, """
