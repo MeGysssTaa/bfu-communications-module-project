@@ -145,6 +145,32 @@ object Britain : CountryInfo{
             <b>V-знак</b>, обращенный ладонью к себе, <p>
              считается оскорбительным. <p>
         """.trimIndent())
+
+        htmlText(contents, """
+            У британцев принято <b>спокойное положение рук</b> <p>
+            на виду: излишняя жестикуляция или руки в <p>
+            карманах считаются дурным тоном. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Скудно используют <b>мимику</b>, но <p>
+            часто <b>улыбаются</b>. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Чтобы дать собеседнику понять, что вы <p>
+            его слушаете, кивать не нужно — <p>
+            просто <b>моргайте</b>. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Британцы избегают <b>физического контакта</b>. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            <b>Покрутить пальцем у виска</b> — <p> 
+            предложить человеку решить самому. <p>
+        """.trimIndent())
     }
 }
 
@@ -164,6 +190,11 @@ object Greece : CountryInfo{
             В некоторых местах Греции <b>жест «Окей»</b> <p>
             считается непристойным. Вместо этого <p>
             используется поднятый вверх большой палец. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            <b>Большой палец вверх</b> — <p>
+            просьба замолчать. <p>
         """.trimIndent())
     }
 }
@@ -226,7 +257,7 @@ object Brazil : CountryInfo {
     }
 }
 
-object RepublicOfSouthAfrica : CountryInfo {
+object SouthAfrica : CountryInfo {
     override val name = "ЮАР"
 
     override fun fill(contents: JPanel) {
@@ -262,6 +293,14 @@ object Mexico : CountryInfo {
             распространён широко. В Мексике при <p>
             встрече часто обнимаются, касаются друг друга <p>
             за локти/плечи при длительном рукопожатии. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Когда хотите показать рост или высоту <p>
+            кого-то (чего-то), используйте в жесте только <p>
+            <b>указательный палец</b>. Не используйте <p>
+            <b>всю ладонь</b> — такой жест применяется <p>
+            исключительно для обозначения роста животного. <p>
         """.trimIndent())
     }
 }
@@ -304,6 +343,46 @@ object India : CountryInfo {
             <b>правую руку</b>. Левая в Индии <p>
             считается нечистой — передавая что-либо <p>
             через неё, вы можете оскорбить человека. <p>
+        """.trimIndent())
+    }
+}
+
+object Philippines : CountryInfo {
+    override val name = "Филиппины"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            Если хотите кого-то позвать, <p>
+            не пытайтесь <b>манить их пальцем</b>. <p>
+            На Филиппинах таким жестом зовут <p>
+            только кого-то гораздо ниже себя по статусу.
+        """.trimIndent())
+    }
+}
+
+object Iran : CountryInfo {
+    override val name = "Иран"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            <b>Обниматься</b> и <b>целоваться</b> <p>
+            на публике — под строгим запретом.
+        """.trimIndent())
+    }
+}
+
+object Cuba : CountryInfo {
+    override val name = "Куба"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            <b>Сморкаться</b> на публике — запрещено. <p>
         """.trimIndent())
     }
 }

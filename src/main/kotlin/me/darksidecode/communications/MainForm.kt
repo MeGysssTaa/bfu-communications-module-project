@@ -68,20 +68,23 @@ class MainForm : JFrame() {
         addRegionButton(Greece, 819, 357)
         addRegionButton(China, 1147, 319)
         addRegionButton(Brazil, 549, 568)
-        addRegionButton(RepublicOfSouthAfrica, 827, 655)
+        addRegionButton(SouthAfrica, 827, 655)
         addRegionButton(Mexico, 359 , 420)
         addRegionButton(Canada, 355, 240)
         addRegionButton(India, 1038, 429)
+        addRegionButton(Philippines, 1216, 468)
+        addRegionButton(Iran, 939, 385)
+        addRegionButton(Cuba, 451, 429)
     }
 
     private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {
         val hoverText = JLabel(countryInfo.name.uppercase())
         hoverText.font = Font("Segoe UI", Font.BOLD, 24)
         hoverText.foreground = Color(255, 255, 255)
-        val hoverTextWidth = 10 + 17 * hoverText.text.length
+        val hoverTextWidth = 10 + 20 * hoverText.text.length
         val hoverTextHeight = 24
         hoverText.setBounds(
-            x - hoverTextWidth / 2,
+            x - hoverTextWidth + 20,
             y + 2,
             hoverTextWidth,
             hoverTextHeight
