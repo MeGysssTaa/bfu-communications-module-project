@@ -19,13 +19,9 @@ class CountryPopup(
     prefY: Int,
     parentPos: Point,
     parentSize: Dimension,
-    val hoverStateChanged: () -> Unit,
+    val handleMouseOver: (Boolean) -> Unit,
 ) : JWindow() {
     private val contents = JPanel(MigLayout())
-
-    @Volatile
-    var isHovered = false
-        private set
 
     init {
         val scrollPane = JScrollPane(contents)
@@ -47,21 +43,20 @@ class CountryPopup(
             else -> prefY
         }
 
-        contents.addMouseListener(object : MouseAdapter() {
+        val mouseOverTrigger = object : MouseAdapter() {
             override fun mouseEntered(e: MouseEvent) {
-                isHovered = true
-                hoverStateChanged()
+                handleMouseOver(true)
             }
             override fun mouseExited(e: MouseEvent) {
-                isHovered = false
-                hoverStateChanged()
+                handleMouseOver(false)
             }
-        })
+        }
+        scrollPane.viewport.addMouseListener(mouseOverTrigger)
+        scrollPane.horizontalScrollBar.addMouseListener(mouseOverTrigger)
+        scrollPane.verticalScrollBar.addMouseListener(mouseOverTrigger)
 
         setLocation(popupX, popupY)
         contents.background = Color(0, 0, 0, 100)
         background = Color(0, 0, 0, 100)
-
-        isVisible = true
     }
 }
