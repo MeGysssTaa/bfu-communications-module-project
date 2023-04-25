@@ -105,7 +105,8 @@ class CountryPin(
             val sinceEntered = System.currentTimeMillis() - lastMouseEntered
             val sinceExited = System.currentTimeMillis() - lastMouseExited
             if (!isOpen && sinceEntered in AutoToggleInfoOnHoverMillis until sinceExited) {
-                open()
+                val mouse = MouseInfo.getPointerInfo().location
+                open(mouse.x - 5, mouse.y - 5)
             } else if (isOpen && sinceExited in AutoToggleInfoOnHoverMillis until sinceEntered) {
                 close()
             }
@@ -116,9 +117,10 @@ class CountryPin(
         ticker.start()
     }
 
-    fun open() {
+    fun open(x: Int, y: Int) {
         closeAllCountryPins()
         isOpen = true
+        popup.reposition(x, y)
         popup.isVisible = true
         lastMouseExited = 0
     }

@@ -17,9 +17,9 @@ class CountryPopup(
     countryInfo: CountryInfo,
     prefX: Int,
     prefY: Int,
-    parentPos: Point,
-    parentSize: Dimension,
-    val handleMouseOver: (Boolean) -> Unit,
+    private val parentPos: Point,
+    private val parentSize: Dimension,
+    private val handleMouseOver: (Boolean) -> Unit,
 ) : JWindow() {
     private val contents = JPanel(MigLayout())
 
@@ -29,6 +29,25 @@ class CountryPopup(
         add(scrollPane)
         size = Dimension(PopupWidth, PopupHeight)
 
+        val mouseOverTrigger = object : MouseAdapter() {
+            override fun mouseEntered(e: MouseEvent) {
+                handleMouseOver(true)
+            }
+            override fun mouseExited(e: MouseEvent) {
+                handleMouseOver(false)
+            }
+        }
+
+        scrollPane.viewport.addMouseListener(mouseOverTrigger)
+        scrollPane.horizontalScrollBar.addMouseListener(mouseOverTrigger)
+        scrollPane.verticalScrollBar.addMouseListener(mouseOverTrigger)
+
+        reposition(prefX, prefY)
+        contents.background = Color(0, 0, 0, 100)
+        background = Color(0, 0, 0, 100)
+    }
+
+    fun reposition(prefX: Int, prefY: Int) {
         val rightBorder = parentPos.x + parentSize.width - 10
         val popupX = when {
             prefX < parentPos.x -> parentPos.x
@@ -43,20 +62,6 @@ class CountryPopup(
             else -> prefY
         }
 
-        val mouseOverTrigger = object : MouseAdapter() {
-            override fun mouseEntered(e: MouseEvent) {
-                handleMouseOver(true)
-            }
-            override fun mouseExited(e: MouseEvent) {
-                handleMouseOver(false)
-            }
-        }
-        scrollPane.viewport.addMouseListener(mouseOverTrigger)
-        scrollPane.horizontalScrollBar.addMouseListener(mouseOverTrigger)
-        scrollPane.verticalScrollBar.addMouseListener(mouseOverTrigger)
-
         setLocation(popupX, popupY)
-        contents.background = Color(0, 0, 0, 100)
-        background = Color(0, 0, 0, 100)
     }
 }
