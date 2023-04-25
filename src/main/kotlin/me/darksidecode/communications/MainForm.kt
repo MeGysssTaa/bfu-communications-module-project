@@ -65,6 +65,7 @@ class MainForm : JFrame() {
         addRegionButton(Philippines, 1216, 468)
         addRegionButton(Iran, 939, 385)
         addRegionButton(Cuba, 451, 429)
+        addRegionButton(Turkey, 865, 353)
     }
 
     private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {
