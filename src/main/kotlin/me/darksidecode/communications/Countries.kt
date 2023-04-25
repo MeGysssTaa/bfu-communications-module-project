@@ -450,3 +450,47 @@ object Cuba : CountryInfo {
         """.trimIndent())
     }
 }
+
+object Turkey : CountryInfo {
+    override val name = "Турция"
+
+    override fun fill(contents: JPanel) {
+        title(contents)
+
+        htmlText(contents, """
+            При общении с турками важно поддерживать <p>
+            <b>зрительный контакт</b>: это знак искренности. <p>
+        """.trimIndent())
+        sep(contents)
+
+        htmlText(contents, """
+            Для выражения <b>отрицания</b> можно:
+            <ul>
+                <li> приподнять брови; </li>
+                <li> цокнуть языком; </li>
+                <li> запрокинуть голову вверх. </li>
+            </ul> (достаточно чего-то одного). <p>
+        """.trimIndent())
+        sep(contents)
+
+        htmlText(contents, """
+            Фраза <i>"спасибо"</i> в ответ на <p>
+            предложение чего-то по умолчанию — <p>
+            <b>вежливый отказ</b>. Если хотите <p>
+            <b>принять</b> то, что вам предложили, <p>
+            используйте более явное <i>"Да, спасибо"</i>. <p>
+        """.trimIndent())
+        sep(contents)
+
+        htmlText(contents, """
+            Мужчины при встрече <b>жмут руки</b>, <p>
+            но при прощании — нет. <p>
+        """.trimIndent())
+        sep(contents)
+
+        htmlText(contents, """
+            <b>Щелчок по горлу</b> — предложение <p>
+            поесть, а не выпить. <p>
+        """.trimIndent())
+    }
+}
