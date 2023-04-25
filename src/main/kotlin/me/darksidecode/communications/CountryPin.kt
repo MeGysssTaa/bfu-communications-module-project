@@ -20,6 +20,7 @@ class CountryPin(
     y: Int,
     parentPos: Point,
     parentSize: Dimension,
+    private val closeAllCountryPins: () -> Unit,
 ) {
     private var lastMouseEntered: Long = 0L
     private var lastMouseExited: Long = 0L
@@ -62,7 +63,17 @@ class CountryPin(
         pane.add(locationPin)
         pane.setComponentZOrder(locationPin, 0)
 
-        locationPin.addMouseListener(object : MouseAdapter() {
+        val locationPinCollision = JPanel()
+        val collisionExtraOffset = 5
+        locationPinCollision.setBounds(
+            x - LocationPinHoveredSize / 2 - collisionExtraOffset,
+            y - LocationPinHoveredSize - collisionExtraOffset,
+            LocationPinHoveredSize + 2 * collisionExtraOffset,
+            LocationPinHoveredSize + 2 * collisionExtraOffset,
+        )
+        pane.add(locationPinCollision)
+
+        locationPinCollision.addMouseListener(object : MouseAdapter() {
             override fun mouseEntered(e: MouseEvent) {
                 lastMouseEntered = System.currentTimeMillis()
 
@@ -105,13 +116,14 @@ class CountryPin(
         ticker.start()
     }
 
-    private fun open() {
+    fun open() {
+        closeAllCountryPins()
         isOpen = true
         popup.isVisible = true
         lastMouseExited = 0
     }
 
-    private fun close() {
+    fun close() {
         isOpen = false
         popup.isVisible = false
         lastMouseEntered = 0

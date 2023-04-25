@@ -68,6 +68,6 @@ class MainForm : JFrame() {
     }
 
     private fun addRegionButton(countryInfo: CountryInfo, x: Int, y: Int) {
-        countryPins += CountryPin(pane, countryInfo, x, y, pane.location, pane.size)
+        countryPins += CountryPin(pane, countryInfo, x, y, pane.location, pane.size) { countryPins.forEach { it.close() } }
     }
 }

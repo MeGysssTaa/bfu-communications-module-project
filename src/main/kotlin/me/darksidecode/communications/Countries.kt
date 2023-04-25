@@ -6,6 +6,7 @@ import java.awt.Image
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JSeparator
 
 interface CountryInfo {
     val name: String
@@ -29,9 +30,15 @@ interface CountryInfo {
     fun image(contents: JPanel, imageFileName: String, width: Int) {
         var imageIcon = ImageIcon(javaClass.getResource("/$imageFileName"))
         var image = imageIcon.image
-        image = image.getScaledInstance(width, (imageIcon.iconHeight * width/imageIcon.iconWidth).toInt(), Image.SCALE_DEFAULT)
+        image = image.getScaledInstance(width, imageIcon.iconHeight * width / imageIcon.iconWidth, Image.SCALE_DEFAULT)
         imageIcon = ImageIcon(image)
         contents.add(JLabel(imageIcon), "wrap")
+    }
+
+    fun sep(contents: JPanel) {
+        val sep = JSeparator()
+        sep.foreground = Color(125, 125, 125)
+        contents.add(sep, "wrap, w 350!, h 10!")
     }
 }
 
@@ -45,6 +52,7 @@ object Germany : CountryInfo {
             <b>Жмут руки</b> при приветствии <p>
             как мужчины, так и женщины <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Осторожнее с <b>постукиванием себя по лбу</b>! <p>
@@ -67,16 +75,18 @@ object Japan : CountryInfo {
             невежливым. Жать руки не надо - вместо <p>
             этого при встрече японцы кланяются. <p>
         """.trimIndent())
-
         image(contents, "japan_bow.jpg", 355)
+        sep(contents)
 
         htmlText(contents, """
             <b>Кивок</b> - просто знак вежливости, не согласия. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             <b>Смотреть в глаза</b> не принято. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             <b>Указывать пальцем</b> на объекты считается <p>
@@ -97,10 +107,10 @@ object France : CountryInfo {
             они растеряны, а когда хотят сказать: <p>
             <i>"Я возмущен, и наплевать мне на это"</i> <p>
         """.trimIndent())
-
         image(contents, "france_shrug.jpg", 370)
+        sep(contents)
 
-        htmlText(contents, """"
+        htmlText(contents, """
             Считается вежливым поддерживать<p>
             <b>зрительный контакт</b> во время<p>
             деловых переговоров и обычных разговоров. <p>
@@ -118,6 +128,7 @@ object Italy : CountryInfo {
             Жесты крайне сильно разнятся в разных <p>
             частях страны, особенно на Севере и Юге. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             <b>Che vuoi</b> - пожалуй, самый известный <p>
@@ -126,26 +137,26 @@ object Italy : CountryInfo {
             жестом итальянцы выражают недоверие или <p>
             высмеивают сказанное другим человеком. <p>
         """.trimIndent())
-
         image(contents, "italy_hand.jpg", 355)
+        sep(contents)
 
         htmlText(contents, """
             Жест <b>"коза"</b> у итальянцев оскорбительный, <p>
             в отличие от Испании и некоторых стран <p>
             Латинской Америки. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Итальянцы складывают указательные пальцы <p>
             в <b>крест на уровне рта</b>, когда хотят <p>
             уверить собеседника в своей искренности.<p>
         """.trimIndent())
-
         image(contents, "italy_finger_cross.jpg", 355)
     }
 }
 
-object Britain : CountryInfo{
+object Britain : CountryInfo {
     override val name = "Великобритания"
 
     override fun fill(contents: JPanel) {
@@ -156,39 +167,42 @@ object Britain : CountryInfo{
             <b>рук</b> на виду: излишняя жестикуляция или руки<p>
             в карманах считаются дурным тоном. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Скудно используют <b>мимику</b>, но <p>
             часто <b>улыбаются</b>. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             <b>V-знак</b>, обращенный ладонью к себе, <p>
              считается оскорбительным. <p>
         """.trimIndent())
-
         image(contents, "britain_v.jpg", 355)
+        sep(contents)
 
         htmlText(contents, """
             Чтобы дать собеседнику понять, что вы <p>
             его слушаете, кивать не нужно — <p>
             просто <b>моргайте</b>. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Британцы избегают <b>физического контакта</b>. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             <b>Покрутить пальцем у виска</b> — <p> 
             предложить человеку решить самому. <p>
         """.trimIndent())
-
         image(contents, "britain_temple.jpg", 355)
     }
 }
 
-object Greece : CountryInfo{
+object Greece : CountryInfo {
     override val name = "Греция"
 
     override fun fill(contents: JPanel) {
@@ -198,13 +212,14 @@ object Greece : CountryInfo{
               Чтобы сказать <i>«нет»</i>, нужно один <p>
               раз <b>наклонить голову</b> назад.<p>
         """.trimIndent())
-
         image(contents, "greece_no.gif", 355)
+        sep(contents)
 
         htmlText(contents, """
             Легкий <b>кивок</b> головы вперед<p>
             означает <i>«да»</i>. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Жест <b>"Мутза"</b> используется как<p>
@@ -213,8 +228,8 @@ object Greece : CountryInfo{
             руки и поднесении ладони к лицу<p>
             оскорбляемого<p>
         """.trimIndent())
-
         image(contents, "greece_moutza.jpg", 355)
+        sep(contents)
 
         htmlText(contents, """
             В некоторых местах Греции <b>жест «Окей»</b> <p>
@@ -224,7 +239,7 @@ object Greece : CountryInfo{
     }
 }
 
-object China : CountryInfo{
+object China : CountryInfo {
     override val name = "Китай"
 
     override fun fill(contents: JPanel) {
@@ -235,14 +250,15 @@ object China : CountryInfo{
             легкая форма отвращения к человеку или <p>
             тому, что он сказал. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Считается вежливым принимать предметы <p>
             двумя руками, особенно от кого-то старше <p>
             по статусу. <p>
         """.trimIndent())
-
         image(contents, "china_taking_gift.jpg", 355)
+        sep(contents)
 
         htmlText(contents, """
             Избегайте большого количества <b>движений</b> <p>
@@ -250,6 +266,7 @@ object China : CountryInfo{
             отвлекающими, особенно в формальной <p>
             обстановке. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Прикосновения и физическая привязанность <p>
@@ -258,13 +275,13 @@ object China : CountryInfo{
             и обычно используются во время знакомств <p>
             и деловых встреч. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
              Чтобы позвать кого-то подойти к вам нужно<p>
              протянуть к человеку руку ладонью вниз,<p>
              сгибая пальцы вперед и назад.
         """.trimIndent())
-
         image(contents, "china_come_here.gif", 355)
     }
 }
@@ -278,12 +295,13 @@ object Brazil : CountryInfo {
         htmlText(contents, """
             Жест <b>"окей"</b> считается оскорбительным. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Жест <b>"рога"</b> — пожелание удачи. <p>
         """.trimIndent())
-
         image(contents, "brazil_horns.jpg", 355)
+        sep(contents)
 
         htmlText(contents, """
             <b>Физический контакт</b> во время общения <p>
@@ -303,6 +321,7 @@ object SouthAfrica : CountryInfo {
         htmlText(contents, """
             Жест <b>"коза"</b> считается оскорбительным. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Широкая <b>улыбка, смех</b> в странах <p>
@@ -325,6 +344,7 @@ object Mexico : CountryInfo {
             отдавать <p> <b>легкий поклон</b> каждому кто<p>
             входит в комнату. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             <b>Физический контакт</b> во время общения <p>
@@ -332,6 +352,7 @@ object Mexico : CountryInfo {
             встрече часто обнимаются, касаются друг друга <p>
             за локти/плечи при длительном рукопожатии. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Когда хотите показать рост или высоту <p>
@@ -341,7 +362,6 @@ object Mexico : CountryInfo {
             исключительно для обозначения роста<p>
             животного. <p>
         """.trimIndent())
-
         image(contents, "doggo.jpg", 355)
     }
 }
@@ -359,12 +379,12 @@ object Canada : CountryInfo {
             происхождением, соответственно, — к <p>
             <b>британцам</b> или <b>американцам</b>. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             В Канаде принято <b>улыбаться</b>. <p>
             Почти всем и всегда, без повода. <p>
         """.trimIndent())
-
         image(contents, "canada_smile.jpg", 355)
     }
 }
@@ -380,6 +400,7 @@ object India : CountryInfo {
             принято <b>складывать ладони у груди</b> и <p>
             произносить <i>"намасте"</i>. <p>
         """.trimIndent())
+        sep(contents)
 
         htmlText(contents, """
             Передавать предметы лучше через <p>
