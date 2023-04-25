@@ -127,6 +127,8 @@ object Italy : CountryInfo {
             высмеивают сказанное другим человеком. <p>
         """.trimIndent())
 
+        image(contents, "italy_hand.jpg", 355)
+
         htmlText(contents, """
             Жест <b>"коза"</b> у итальянцев оскорбительный, <p>
             в отличие от Испании и некоторых стран <p>
@@ -138,6 +140,8 @@ object Italy : CountryInfo {
             в <b>крест на уровне рта</b>, когда хотят <p>
             уверить собеседника в своей искренности.<p>
         """.trimIndent())
+
+        image(contents, "italy_finger_cross.jpg", 355)
     }
 }
 
@@ -148,20 +152,22 @@ object Britain : CountryInfo{
         title(contents)
 
         htmlText(contents, """
-            <b>V-знак</b>, обращенный ладонью к себе, <p>
-             считается оскорбительным. <p>
-        """.trimIndent())
-
-        htmlText(contents, """
             У британцев принято <b>спокойное положение</b><p>
-            <b>рук</b> на виду: излишняя жестикуляция или руки в <p>
-            карманах считаются дурным тоном. <p>
+            <b>рук</b> на виду: излишняя жестикуляция или руки<p>
+            в карманах считаются дурным тоном. <p>
         """.trimIndent())
 
         htmlText(contents, """
             Скудно используют <b>мимику</b>, но <p>
             часто <b>улыбаются</b>. <p>
         """.trimIndent())
+
+        htmlText(contents, """
+            <b>V-знак</b>, обращенный ладонью к себе, <p>
+             считается оскорбительным. <p>
+        """.trimIndent())
+
+        image(contents, "britain_v.jpg", 355)
 
         htmlText(contents, """
             Чтобы дать собеседнику понять, что вы <p>
@@ -177,6 +183,8 @@ object Britain : CountryInfo{
             <b>Покрутить пальцем у виска</b> — <p> 
             предложить человеку решить самому. <p>
         """.trimIndent())
+
+        image(contents, "britain_temple.jpg", 355)
     }
 }
 
@@ -188,19 +196,30 @@ object Greece : CountryInfo{
 
         htmlText(contents, """
               Чтобы сказать <i>«нет»</i>, нужно один <p>
-              раз <b>наклонить голову</b> назад. Легкий <p>
-              <b>кивок</b> головы вперед означает <i>«да»</i>. <p>
+              раз <b>наклонить голову</b> назад.<p>
         """.trimIndent())
+
+        image(contents, "greece_no.gif", 355)
+
+        htmlText(contents, """
+            Легкий <b>кивок</b> головы вперед<p>
+            означает <i>«да»</i>. <p>
+        """.trimIndent())
+
+        htmlText(contents, """
+            Жест <b>"Мутза"</b> используется как<p>
+            оскорбление и означающий презрение.<p>
+            Он состоит в растопыривании всех пальцев<p>
+            руки и поднесении ладони к лицу<p>
+            оскорбляемого<p>
+        """.trimIndent())
+
+        image(contents, "greece_moutza.jpg", 355)
 
         htmlText(contents, """
             В некоторых местах Греции <b>жест «Окей»</b> <p>
             считается непристойным. Вместо этого <p>
             используется поднятый вверх большой палец. <p>
-        """.trimIndent())
-
-        htmlText(contents, """
-            <b>Большой палец вверх</b> — <p>
-            просьба замолчать. <p>
         """.trimIndent())
     }
 }
@@ -264,6 +283,8 @@ object Brazil : CountryInfo {
             Жест <b>"рога"</b> — пожелание удачи. <p>
         """.trimIndent())
 
+        image(contents, "brazil_horns.jpg", 355)
+
         htmlText(contents, """
             <b>Физический контакт</b> во время общения <p>
             распространён широко. В Бразилии при <p>
@@ -300,8 +321,9 @@ object Mexico : CountryInfo {
         htmlText(contents, """
             Во время делового общения необходимо <p>
             <b>пожать руку</b> каждому из участников <p>
-            (при встрече и при расставании), а также отдавать <p>
-            <b>легкий поклон</b> каждому кто входит в комнату. <p>
+            (при встрече и при расставании), а также<p>
+            отдавать <p> <b>легкий поклон</b> каждому кто<p>
+            входит в комнату. <p>
         """.trimIndent())
 
         htmlText(contents, """
@@ -319,6 +341,8 @@ object Mexico : CountryInfo {
             исключительно для обозначения роста<p>
             животного. <p>
         """.trimIndent())
+
+        image(contents, "doggo.jpg", 355)
     }
 }
 
