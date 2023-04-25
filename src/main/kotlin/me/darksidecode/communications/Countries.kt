@@ -26,10 +26,10 @@ interface CountryInfo {
         contents.add(lbl, "wrap")
     }
 
-    fun image(contents: JPanel, imageFileName: String) {
+    fun image(contents: JPanel, imageFileName: String, width: Int) {
         var imageIcon = ImageIcon(javaClass.getResource("/$imageFileName"))
         var image = imageIcon.image
-        image = image.getScaledInstance(250, 200, Image.SCALE_DEFAULT)
+        image = image.getScaledInstance(width, (imageIcon.iconHeight * width/imageIcon.iconWidth).toInt(), Image.SCALE_DEFAULT)
         imageIcon = ImageIcon(image)
         contents.add(JLabel(imageIcon), "wrap")
     }
@@ -51,6 +51,8 @@ object Germany : CountryInfo {
             Так немцы говорят собеседнику: <p>
             <i>"Ты что, с ума сошёл?"</i> <p>
         """.trimIndent())
+
+        image(contents, "germany_tapping_head.gif", 370)
     }
 }
 
@@ -65,6 +67,8 @@ object Japan : CountryInfo {
             невежливым. Жать руки не надо - вместо <p>
             этого при встрече японцы кланяются. <p>
         """.trimIndent())
+
+        image(contents, "japan_bow.jpg", 355)
 
         htmlText(contents, """
             <b>Кивок</b> - просто знак вежливости, не согласия. <p>
@@ -93,6 +97,8 @@ object France : CountryInfo {
             они растеряны, а когда хотят сказать: <p>
             <i>"Я возмущен, и наплевать мне на это"</i> <p>
         """.trimIndent())
+
+        image(contents, "france_shrug.jpg", 370)
 
         htmlText(contents, """"
             Считается вежливым поддерживать<p>
@@ -147,8 +153,8 @@ object Britain : CountryInfo{
         """.trimIndent())
 
         htmlText(contents, """
-            У британцев принято <b>спокойное положение рук</b> <p>
-            на виду: излишняя жестикуляция или руки в <p>
+            У британцев принято <b>спокойное положение</b><p>
+            <b>рук</b> на виду: излишняя жестикуляция или руки в <p>
             карманах считаются дурным тоном. <p>
         """.trimIndent())
 
@@ -217,6 +223,8 @@ object China : CountryInfo{
             по статусу. <p>
         """.trimIndent())
 
+        image(contents, "china_taking_gift.jpg", 355)
+
         htmlText(contents, """
             Избегайте большого количества <b>движений</b> <p>
             <b>руками</b>. Они считаются невежливыми и <p>
@@ -231,6 +239,14 @@ object China : CountryInfo{
             и обычно используются во время знакомств <p>
             и деловых встреч. <p>
         """.trimIndent())
+
+        htmlText(contents, """
+             Чтобы позвать кого-то подойти к вам нужно<p>
+             протянуть к человеку руку ладонью вниз,<p>
+             сгибая пальцы вперед и назад.
+        """.trimIndent())
+
+        image(contents, "china_come_here.gif", 355)
     }
 }
 
@@ -300,7 +316,8 @@ object Mexico : CountryInfo {
             кого-то (чего-то), используйте в жесте только <p>
             <b>указательный палец</b>. Не используйте <p>
             <b>всю ладонь</b> — такой жест применяется <p>
-            исключительно для обозначения роста животного. <p>
+            исключительно для обозначения роста<p>
+            животного. <p>
         """.trimIndent())
     }
 }
@@ -357,7 +374,7 @@ object Philippines : CountryInfo {
             Если хотите кого-то позвать, <p>
             не пытайтесь <b>манить их пальцем</b>. <p>
             На Филиппинах таким жестом зовут <p>
-            только кого-то гораздо ниже себя по статусу.
+            только кого-то гораздо ниже себя по статусу.<p>
         """.trimIndent())
     }
 }
