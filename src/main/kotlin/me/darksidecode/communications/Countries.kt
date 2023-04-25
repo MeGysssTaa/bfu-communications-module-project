@@ -424,6 +424,7 @@ object Philippines : CountryInfo {
             На Филиппинах таким жестом зовут <p>
             только кого-то гораздо ниже себя по статусу.<p>
         """.trimIndent())
+        image(contents, "a.gif", 370)
     }
 }
 
