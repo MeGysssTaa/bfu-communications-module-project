@@ -347,14 +347,6 @@ object Mexico : CountryInfo {
         sep(contents)
 
         htmlText(contents, """
-            <b>Физический контакт</b> во время общения <p>
-            распространён широко. В Мексике при <p>
-            встрече часто обнимаются, касаются друг друга <p>
-            за локти/плечи при длительном рукопожатии. <p>
-        """.trimIndent())
-        sep(contents)
-
-        htmlText(contents, """
             Когда хотите показать рост или высоту <p>
             кого-то (чего-то), используйте в жесте только <p>
             <b>указательный палец</b>. Не используйте <p>
@@ -363,6 +355,14 @@ object Mexico : CountryInfo {
             животного. <p>
         """.trimIndent())
         image(contents, "doggo.jpg", 355)
+        sep(contents)
+
+        htmlText(contents, """
+            <b>Физический контакт</b> во время общения <p>
+            распространён широко. В Мексике при <p>
+            встрече часто обнимаются, касаются друг друга <p>
+            за локти/плечи при длительном рукопожатии. <p>
+        """.trimIndent())
     }
 }
 
@@ -400,6 +400,7 @@ object India : CountryInfo {
             принято <b>складывать ладони у груди</b> и <p>
             произносить <i>"намасте"</i>. <p>
         """.trimIndent())
+        image(contents, "india_namaste.jpg", 355)
         sep(contents)
 
         htmlText(contents, """
@@ -449,6 +450,7 @@ object Cuba : CountryInfo {
         htmlText(contents, """
             <b>Сморкаться</b> на публике — запрещено. <p>
         """.trimIndent())
+        image(contents, "worst_sound.jpg", 370)
     }
 }
 
