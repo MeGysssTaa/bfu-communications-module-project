@@ -364,6 +364,8 @@ object Canada : CountryInfo {
             В Канаде принято <b>улыбаться</b>. <p>
             Почти всем и всегда, без повода. <p>
         """.trimIndent())
+
+        image(contents, "canada_smile.jpg", 355)
     }
 }
 
